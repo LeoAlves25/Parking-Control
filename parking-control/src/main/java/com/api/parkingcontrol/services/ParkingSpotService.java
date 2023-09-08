@@ -26,18 +26,6 @@ public class ParkingSpotService {
         return parkingSpotRepository.save(parkingSpotModel);
     }
 
-    public boolean existByLicensePlateCar(String licensePlateCar) {
-        return parkingSpotRepository.existsByLicensePlateCar(licensePlateCar);
-    }
-
-    public boolean existByParkingSpotNumber(String parkingSpotNumber) {
-        return parkingSpotRepository.existsByParkingSpotNumber(parkingSpotNumber);
-    }
-
-    public boolean existByApartmentAndBlock(String apartment, String block) {
-        return parkingSpotRepository.existsByApartmentAndBlock(apartment, block);
-    }
-
     public Page<ParkingSpotModel> findAll(Pageable pageable) {
         return parkingSpotRepository.findAll(pageable);
     }
