@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.api.parkingcontrol.models.ParkingSpotModel;
 
 public interface ParkingSpotRepository extends JpaRepository<ParkingSpotModel, UUID>{
+
+    boolean existsByParkingSpotNumber(String parkingSpotNumber);
     
     
     

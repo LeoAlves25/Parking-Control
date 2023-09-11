@@ -4,13 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -29,9 +27,8 @@ public class ParkingSpotModel implements Serializable{
     @Column(nullable = false)
     private LocalDateTime registrationDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "resident_id", referencedColumnName = "id", nullable = true)
-    private ResidentModel residentModel;
+    @OneToOne(mappedBy = "parkingSpot")
+    private ApartmentModel apartment;
 
     public UUID getId() {
         return id;

@@ -41,17 +41,14 @@ public class ParkingSpotController {
 
     @PostMapping
     public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ParkingSpotDTO parkingSpotDTO){
-        // if(parkingSpotService.existByLicensePlateCar(parkingSpotDTO.getLicensePlateCar()))
-        //     return ResponseEntity.status(HttpStatus.CONFLICT).body("License plate already exists");
 
-        // if(parkingSpotService.existByParkingSpotNumber(parkingSpotDTO.getParkingSpotNumber()))
-        //     return ResponseEntity.status(HttpStatus.CONFLICT).body("Parking spot number already exists");
-
-        // if(parkingSpotService.existByApartmentAndBlock(parkingSpotDTO.getApartment(), parkingSpotDTO.getBlock()))
-        //     return ResponseEntity.status(HttpStatus.CONFLICT).body("Apartment and block already exists");
+        if(parkingSpotService.existByParkingSpotNumber(parkingSpotDTO.getParkingSpotNumber().toUpperCase()))
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Parking spot number already exists");
 
         var parkingSpotModel = new ParkingSpotModel();
         BeanUtils.copyProperties(parkingSpotDTO, parkingSpotModel);
+        parkingSpotModel.setParkingSpotNumber(parkingSpotModel.getParkingSpotNumber().toUpperCase());
+
         parkingSpotModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(parkingSpotService.save(parkingSpotModel));
@@ -80,6 +77,7 @@ public class ParkingSpotController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parking spot not found");
 
         parkingSpotService.delete(parkingSpotModelOptional.get());
+
         return ResponseEntity.status(HttpStatus.OK).body("Parking spot deleted");
     }
 

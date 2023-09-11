@@ -43,4 +43,17 @@ public class ApartmentService {
         return apartmentRepository.save(apartmentModel);
     }
 
+    public boolean existByApartmentNumberAndBlock(String apartmentNumber, String block) {
+        return apartmentRepository.existsByNumberAndBlock(apartmentNumber, block);
+    }
+
+    public Page<ApartmentModel> findAllByBlock(String block, Pageable pageable) {
+
+        return apartmentRepository.findAllByBlock(block, pageable);
+    }
+
+    public Optional<ApartmentModel> findByApartmentNumber(String apartmentNumber) {
+        return apartmentRepository.findByNumber(apartmentNumber);
+    }
+
 }

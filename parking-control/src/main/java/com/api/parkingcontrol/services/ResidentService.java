@@ -43,4 +43,8 @@ public class ResidentService {
         return residentRepository.save(residentModel);
     }
 
+    public boolean existByName(String name) {
+        return residentRepository.existsByName(name);
+    }
+
 }

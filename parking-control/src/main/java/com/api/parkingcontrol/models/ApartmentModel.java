@@ -2,11 +2,13 @@ package com.api.parkingcontrol.models;
 
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -19,13 +21,17 @@ public class ApartmentModel {
     private UUID id;
 
     @Column(nullable = false, length = 30)
-    private String apartmentNumber;
+    private String number;
 
     @Column(nullable = false, length = 30)
     private String block;
 
     @OneToOne(mappedBy = "apartment")
-    private ResidentModel residentModel;
+    private ResidentModel resident;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "parkingSpot_id", referencedColumnName = "id", nullable = true)
+    private ParkingSpotModel parkingSpot;
 
     public UUID getId() {
         return id;
@@ -36,11 +42,11 @@ public class ApartmentModel {
     }
 
     public String getApartmentNumber() {
-        return apartmentNumber;
+        return number;
     }
 
-    public void setApartmentNumber(String apartmentNumber) {
-        this.apartmentNumber = apartmentNumber;
+    public void setApartmentNumber(String number) {
+        this.number = number;
     }
 
     public String getBlock() {

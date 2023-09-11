@@ -42,4 +42,16 @@ public class CarService {
     public Object update(CarModel carModel) {
         return carRepository.save(carModel);
     }
+
+    public boolean existsByLicensePlateCar(String licensePlateCar) {
+        return carRepository.existsByLicensePlateCar(licensePlateCar);
+    }
+
+    public Optional<CarModel> findByLicensePlateCar(String licensePlate) {
+        return carRepository.findByLicensePlateCar(licensePlate);
+    }
+
+    public Optional<CarModel> findByBrandCar(String brandCar) {
+        return carRepository.findByBrandCar(brandCar);
+    }
 }

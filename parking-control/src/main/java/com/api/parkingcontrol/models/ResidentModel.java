@@ -31,6 +31,35 @@ public class ResidentModel {
     @JoinColumn(name = "apartment_id", referencedColumnName = "id", nullable = true)
     private ApartmentModel apartment;
 
-    @OneToOne(mappedBy = "residentModel")
-    private ParkingSpotModel parkingSpotModel;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CarModel getCar() {
+        return car;
+    }
+
+    public void setCar(CarModel car) {
+        this.car = car;
+    }
+
+    public ApartmentModel getApartment() {
+        return apartment;
+    }
+
+    public void setApartment(ApartmentModel apartment) {
+        this.apartment = apartment;
+    }
+
+    public Object getLicensePlateOfCar() {
+        return car.getLicensePlateCar();
+    }
+
+    public boolean hasApartment(String apartmentNumber, String block){
+        return apartment.getApartmentNumber().equals(apartmentNumber) && apartment.getBlock().equals(block);
+    }
 }
